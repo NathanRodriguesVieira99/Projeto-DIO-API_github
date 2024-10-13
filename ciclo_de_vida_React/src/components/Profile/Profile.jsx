@@ -1,25 +1,37 @@
-import React from 'react'
+import React from 'react';
+import './_Profile.scss';
+import List from '../List/List';
 
-import './_Profile.scss'
+function Profile({ currentUser, repos }) {
 
-function Profile() {
   return (
     <>
-      <div className='perfil'>
-        <img src="https://upload.wikimedia.org/wikipedia/pt/6/6b/Roots1996.jpg" alt="profile image" className='profile' />
+      {currentUser && currentUser.name ? (
+        <>
+          <div className='perfil'>
+            <img src={currentUser.avatar_url}
+              alt="profile image "
+              className='profile' />
+            <div>
+              <h3>{currentUser.name}</h3>
+              <span>@{currentUser.login}</span>
+              <p>{currentUser.bio}</p>
+            </div>
+          </div>
+          <hr />
+        </>
+      ) : null}
+      {repos && repos.length ? (
         <div>
-          <h3>Nathan Rodrigues</h3>
-          <span>@NathanRodriguesVieira99 </span>
-          <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Soluta, mollitia.</p>
+          <h4 className='repositorio' style={{ fontSize: '32px', color: '#fff', margin: '12px 0', textAlign: 'center' }}>Repositórios</h4>
+          {repos.map((repo) => (
+            <List title={repo.name} description={repo.description} />
+          ))}
         </div>
-        <div>
-        </div>
-      </div>
-      <hr />
+      ) : null}
+
     </>
-
-
-  )
+  );
 }
 
-export default Profile
+export default Profile;

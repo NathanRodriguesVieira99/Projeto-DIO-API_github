@@ -2,9 +2,13 @@ import React from 'react'
 
 import './_List.scss'
 
-function List() {
+function List({ title, description }) {
   return (
-    <div></div>
+    <div className='itemList'>
+      <strong>{title}</strong>
+      <p>{description}</p>
+      <hr />
+    </div>
   )
 }
 
